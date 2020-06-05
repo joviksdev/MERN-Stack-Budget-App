@@ -1,6 +1,14 @@
 const express = require('express');
+const connectDb = require('./config/connectDb');
 
 const app = express();
+
+// Connect DB
+connectDb();
+
+// Middleware
+
+app.use(express.json());
 
 app.get('/', (req, res) => res.json({ msg: 'Budget Application API' }));
 
