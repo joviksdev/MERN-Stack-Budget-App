@@ -17,6 +17,7 @@ app.get('/', (req, res) => res.json({ msg: 'Budget Application API' }));
 app.use('/api/register', require('./routes/register'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/budget', require('./routes/budget'));
+app.use('/api/expense', require('./routes/expense'));
 
 const PORT = process.env.PORT || 5000;
 

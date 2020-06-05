@@ -95,6 +95,10 @@ router.put(
 // access       private
 
 router.delete('/:id', [auth], async (req, res) => {
+  if (req.id !== req.params.id) {
+    return res.status(403).json({ msg: 'Failed request, try again' });
+  }
+
   try {
     await Budget.findOneAndDelete({ user: req.id });
     res.json({ msg: 'Budget deleted successfully' });
