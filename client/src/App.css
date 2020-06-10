@@ -1,5 +1,145 @@
+:root {
+  --light-color: #ffffff;
+  --light-gray: #f5f4f4;
+  --dark-color: #141110;
+  --primary-color: #5917d4;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: var(--light-gray);
+  color: var(--dark-color);
+}
+
+/* Utilities */
+
+.ml {
+  margin-left: 1rem;
+}
+
+.mb {
+  margin-bottom: 0.5rem;
+}
+
+.mr {
+  margin-right: 1rem;
+}
+
+.container {
+  max-width: 1100px;
+  width: 90%;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  width: 100%;
+}
+
+/* Header */
+
+header {
+  background-color: var(--light-color);
+  box-shadow: 2px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-list {
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-list {
+  position: absolute;
+  top: 45px;
+  text-align: center;
+  background-color: var(--light-color);
+  padding: 10px 20px 0 20px;
+  clip-path: polygon(
+    0 10px,
+    45% 10px,
+    50% 0,
+    55% 10px,
+    100% 10px,
+    100% 100%,
+    0 100%
+  );
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.auth-list-item {
+  padding: 8px 15px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.auth-list-item:last-child {
+  border-bottom: none;
+}
+
+/* Form */
+
+.form-group {
+  margin: 10px 0;
+}
+
+form {
+  max-width: 600px;
+  margin: auto;
+}
+
+label {
+  display: block;
+}
+
+input[type='text'],
+input[type='submit'] {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+input[type='submit'] {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+}
+
+input[type='submit']:hover {
+  opacity: 0.9;
+}
+
+/* End Form */
