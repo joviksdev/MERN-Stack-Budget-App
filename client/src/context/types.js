@@ -1,1 +1,14 @@
 export const TOGGLE_AUTH = 'TOGGLE_AUTH';
+export const TOGGLE_MENU = 'TOGGLE_MENU';
+export const DISPLAY_BUDGET_FORM = 'DISPLAY_BUDGET_FORM';
+export const DISPLAY_EXPENSE_FORM = 'DISPLAY_EXPENSE_FORM';
+export const HIDE_FORM = 'HIDE_FORM';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const SET_EDIT = 'SET_EDIT';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const UPDATE_EXPENSE = 'UPDATE_EXPENSE';
+export const ADD_BUDGET = 'ADD_BUDGET';
+export const DELETE_BUDGET = 'DELETE_BUDGET';
+export const UPDATE_BUDGET = 'UPDATE_BUDGET';
+export const CLEAR_ALL = 'CLEAR_ALL';
+export const HIDE_AUTH_LIST = 'HIDE_AUTH_LIST';
