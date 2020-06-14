@@ -28,7 +28,10 @@ const Header = () => {
           }}
           className='header-text'
         >
-          Budget
+          <Link className='link' to='/'>
+            {' '}
+            Budget
+          </Link>
         </h4>
         <nav className='navbar'>
           <ul className='navbar-nav'>

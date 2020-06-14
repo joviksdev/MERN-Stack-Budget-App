@@ -1,8 +1,14 @@
 import React, { useContext, Fragment, useState, useEffect } from 'react';
 import AppContext from '../../context/app/appContext';
+import AlertContext from '../../context/alert/alertContext';
+import Alert from '../layout/Alert';
 
 const ExpenseForm = () => {
   const appContext = useContext(AppContext);
+  const alertContext = useContext(AlertContext);
+
+  const { setAlert } = alertContext;
+
   const {
     isExpenseFormDisplay,
     currentEdit,
@@ -37,25 +43,50 @@ const ExpenseForm = () => {
 
     const { name, amount } = expenses;
     if (name === '' || amount === '') {
-      return console.log('Please fill in all fields');
+      setAlert({
+        msg: 'Please fill in all fields',
+        type: 'all-field',
+        color: 'warning'
+      });
+      return;
     }
 
     if (!isString.test(name)) {
-      return console.log('Invalid name');
+      setAlert({
+        msg: 'Please enter a valid name',
+        type: 'invalid-name',
+        color: 'warning'
+      });
+      return;
     }
 
     if (!isNum.test(amount)) {
-      return console.log('Invalid amount');
+      setAlert({
+        msg: 'Please enter a valid amount',
+        type: 'invalid-amount',
+        color: 'warning'
+      });
+      return;
     }
 
     if (isSetEdit) {
       updateExpense({ ...currentEdit, ...expenses });
+      setAlert({
+        msg: 'Update is successfully',
+        type: 'success',
+        color: 'success'
+      });
       setExpenses({
         name: '',
         amount: ''
       });
     } else {
       addExpense(expenses);
+      setAlert({
+        msg: 'Expense added successfully',
+        type: 'success',
+        color: 'success'
+      });
       setExpenses({
         name: '',
         amount: ''
@@ -70,6 +101,7 @@ const ExpenseForm = () => {
         className='expense-form'
         onSubmit={onSubmit}
       >
+        <Alert />
         <p>{isSetEdit ? 'Edit expense' : 'Add new expense'}</p>
         <div className='form-group'>
           <label htmlFor='expense name'>name</label>

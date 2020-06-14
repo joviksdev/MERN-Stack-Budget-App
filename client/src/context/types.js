@@ -12,3 +12,5 @@ export const DELETE_BUDGET = 'DELETE_BUDGET';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
 export const CLEAR_ALL = 'CLEAR_ALL';
 export const HIDE_AUTH_LIST = 'HIDE_AUTH_LIST';
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
