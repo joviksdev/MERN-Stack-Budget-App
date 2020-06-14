@@ -25,7 +25,10 @@ const ExpenseForm = () => {
   useEffect(
     () => {
       if (currentEdit) {
-        setExpenses({ name: currentEdit.name, amount: currentEdit.amount });
+        setExpenses({
+          name: currentEdit.name,
+          amount: currentEdit.amount
+        });
       }
     },
     // eslint-disable-next-line
@@ -42,16 +45,8 @@ const ExpenseForm = () => {
     const isString = /[a-zA-Z]+\s?[a-zA-Z]?/;
 
     const { name, amount } = expenses;
-    if (name === '' || amount === '') {
-      setAlert({
-        msg: 'Please fill in all fields',
-        type: 'all-field',
-        color: 'warning'
-      });
-      return;
-    }
 
-    if (!isString.test(name)) {
+    if (!isString.test(name) || name === '') {
       setAlert({
         msg: 'Please enter a valid name',
         type: 'invalid-name',
@@ -60,7 +55,7 @@ const ExpenseForm = () => {
       return;
     }
 
-    if (!isNum.test(amount)) {
+    if (!isNum.test(amount) || amount === '') {
       setAlert({
         msg: 'Please enter a valid amount',
         type: 'invalid-amount',
@@ -123,6 +118,7 @@ const ExpenseForm = () => {
             value={expenses.amount}
           />
         </div>
+
         <input
           type='submit'
           value={isSetEdit ? 'Edit Expense' : 'Add Expense'}

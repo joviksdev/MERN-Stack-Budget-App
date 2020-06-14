@@ -165,7 +165,8 @@ form p {
 input[type='text'],
 input[type='password'],
 input[type='email'],
-input[type='submit'] {
+input[type='submit'],
+select {
   display: block;
   width: 100%;
   padding: 10px;
@@ -360,8 +361,13 @@ input[type='submit']:hover {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
-.expense-form label {
+.expense-form label,
+.currency-label {
   display: none;
+}
+
+select > option {
+  padding: 10px;
 }
 
 /* Budget Form */
@@ -429,7 +435,7 @@ input[type='submit']:hover {
   width: 100%;
   background-color: var(--primary-color);
   color: var(--light-color);
-  padding: 20px;
+  padding: 0 20px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 

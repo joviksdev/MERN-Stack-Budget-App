@@ -10,17 +10,17 @@ import {
   DELETE_EXPENSE,
   SET_EDIT,
   ADD_BUDGET,
+  UPDATE_BUDGET,
   DELETE_BUDGET,
   ADD_EXPENSE,
   UPDATE_EXPENSE,
-  UPDATE_BUDGET,
   CLEAR_ALL,
   HIDE_AUTH_LIST
 } from '../types';
 
 const AppState = props => {
   const initialState = {
-    budgetValue: 888,
+    budgetValue: null,
     expenses: [
       {
         id: 1,
@@ -105,20 +105,20 @@ const AppState = props => {
     });
   };
 
-  // Delete Budget
-
-  const deleteBudget = id => {
-    dispatch({
-      type: DELETE_BUDGET
-    });
-  };
-
-  // Update Expense
+  // Update Budget
 
   const updateBudget = value => {
     dispatch({
       type: UPDATE_BUDGET,
       payload: value
+    });
+  };
+
+  // Delete Budget
+
+  const deleteBudget = id => {
+    dispatch({
+      type: DELETE_BUDGET
     });
   };
 
