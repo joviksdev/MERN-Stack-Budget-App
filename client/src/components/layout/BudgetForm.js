@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../../context/app/appContext';
 import AlertContext from '../../context/alert/alertContext';
+import Alert from './Alert';
 
 const BudgetForm = () => {
   const appContext = useContext(AppContext);
@@ -30,25 +31,28 @@ const BudgetForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    console.log('click');
 
     const { amount, currency } = budget;
 
     const isNum = new RegExp('[1-9][0-9]?');
     if (amount === '' || !isNum.test(amount)) {
-      setAlert({
-        msg: 'Invalid amount, please entter amount',
-        type: 'all-field',
-        color: 'warning'
-      });
+      setAlert([
+        {
+          msg: 'Invalid amount, please entter amount',
+          type: 'warning'
+        }
+      ]);
       return;
     }
 
     if (currency === 'Select currency') {
-      setAlert({
-        msg: 'Please select a currency',
-        type: 'all-field',
-        color: 'warning'
-      });
+      setAlert([
+        {
+          msg: 'Please select a currency',
+          type: 'warning'
+        }
+      ]);
       return;
     }
 
@@ -65,6 +69,8 @@ const BudgetForm = () => {
       style={{ display: isBudgetFormDisplay ? 'block' : 'none' }}
       onSubmit={onSubmit}
     >
+      <h3 className='form-header'>Budget</h3>
+      <Alert />
       {budgetValue ? (
         <p>
           Previous Budget: <span>&#8358;</span> {budgetValue.amount}

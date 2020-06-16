@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, useEffect } from 'react';
 import BudgetForm from '../layout/BudgetForm';
 import ExpenseForm from '../layout/ExpenseForm';
 import MenuList from '../layout/MenuList';
@@ -8,11 +8,19 @@ import Budget from '../contents/Budget';
 import Expense from '../contents/Expense';
 import NoContent from '../layout/NoContent';
 import Total from '../contents/Total';
+import ToggleBtnMenu from '../layout/ToggleBtnMenu';
+import AuthContext from '../../context/auth/authContext';
 
 const Index = () => {
   const appContext = useContext(AppContext);
+  const authContext = useContext(AuthContext);
 
   const { budgetValue, expenses } = appContext;
+
+  useEffect(() => {
+    authContext.getUser();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <section>
@@ -22,6 +30,7 @@ const Index = () => {
         </Fragment>
       )}
 
+      <ToggleBtnMenu />
       <Budget />
       <Expense />
       <CloseBtn />

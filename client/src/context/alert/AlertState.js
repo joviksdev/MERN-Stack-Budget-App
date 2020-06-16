@@ -7,21 +7,18 @@ const AlartState = props => {
   const initialState = [];
 
   const [state, dispatch] = useReducer(alertReducer, initialState);
-
   // Set Alert
 
-  const setAlert = alert => {
-    const alertExist = state.find(err => alert.type === err.type);
+  const setAlert = alerts => {
+    const alertArray = alerts.map(alert => ({ ...alert }));
 
-    if (!alertExist) {
-      dispatch({
-        type: SET_ALERT,
-        payload: alert
-      });
-    }
+    dispatch({
+      type: SET_ALERT,
+      payload: alertArray
+    });
 
     setTimeout(() => {
-      removeAlert(alert.type);
+      removeAlert();
     }, 5000);
   };
 

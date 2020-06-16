@@ -5,13 +5,18 @@ const Alert = () => {
   const alertContext = useContext(AlertContext);
 
   const { alerts } = alertContext;
-  const alertMessage = alerts.map(alert => (
-    <div key={alert.type} className={`alert-container alert-${alert.color}`}>
-      <p className={`container`}>{alert.msg}</p>
-    </div>
-  ));
 
-  return alerts.length !== 0 && <Fragment>{alertMessage}</Fragment>;
+  return (
+    alerts.length !== 0 && (
+      <Fragment>
+        {alerts.map((alert, i) => (
+          <div key={i} className={`alert-container alert-${alert.type}`}>
+            <p className={`container`}>{alert.msg}</p>
+          </div>
+        ))}
+      </Fragment>
+    )
+  );
 };
 
 export default Alert;

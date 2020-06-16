@@ -58,6 +58,7 @@ body {
 
 li {
   list-style-type: none;
+  cursor: pointer;
 }
 
 img {
@@ -118,8 +119,10 @@ header .container {
   position: absolute;
   top: 45px;
   text-align: center;
-  background-color: #d1d1d1;
-  padding: 10px 20px 0 20px;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  padding-top: 10px;
+  width: 150px;
   clip-path: polygon(
     0 10px,
     45% 10px,
@@ -133,9 +136,13 @@ header .container {
 }
 
 .auth-list-item {
-  padding: 8px 15px;
-  border-bottom: 1px solid var(--light-gray);
-  color: var(--primary-color);
+  padding: 10px;
+  border-bottom: 1px solid #ffffff62;
+  color: var(--light-color);
+}
+
+.auth-list-item .link {
+  color: var(--light-color);
 }
 
 .auth-list-item:last-child {
@@ -158,8 +165,19 @@ label,
 form p {
   display: block;
   text-transform: capitalize;
-  font-weight: 600;
   margin: 8px 0;
+}
+
+form p {
+  font-weight: 600;
+}
+
+label {
+  display: none;
+}
+
+.form-header {
+  color: var(--primary-color);
 }
 
 input[type='text'],
@@ -374,12 +392,16 @@ select > option {
 
 /* Login Form */
 
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80vh;
+}
+
 .login-form,
 .register-form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 90%;
   max-width: 600px;
   z-index: 9;
@@ -457,6 +479,7 @@ select > option {
   z-index: 8;
   color: var(--light-color);
   padding: 5px 0;
+  margin: 10px 0;
 }
 
 .alert-warning {

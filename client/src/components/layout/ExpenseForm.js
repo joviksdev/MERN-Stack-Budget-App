@@ -46,21 +46,33 @@ const ExpenseForm = () => {
 
     const { name, amount } = expenses;
 
-    if (!isString.test(name) || name === '') {
-      setAlert({
-        msg: 'Please enter a valid name',
-        type: 'invalid-name',
-        color: 'warning'
-      });
+    if (name === '' || amount === '') {
+      setAlert([
+        {
+          msg: 'Please enter all field',
+          type: 'warning'
+        }
+      ]);
       return;
     }
 
-    if (!isNum.test(amount) || amount === '') {
-      setAlert({
-        msg: 'Please enter a valid amount',
-        type: 'invalid-amount',
-        color: 'warning'
-      });
+    if (!isString.test(name) || name === '') {
+      setAlert([
+        {
+          msg: 'Please enter a valid name',
+          type: 'warning'
+        }
+      ]);
+      return;
+    }
+
+    if (!isNum.test(amount)) {
+      setAlert([
+        {
+          msg: 'Please enter a valid amount',
+          type: 'warning'
+        }
+      ]);
       return;
     }
 
@@ -68,8 +80,7 @@ const ExpenseForm = () => {
       updateExpense({ ...currentEdit, ...expenses });
       setAlert({
         msg: 'Update is successfully',
-        type: 'success',
-        color: 'success'
+        type: 'success'
       });
       setExpenses({
         name: '',
@@ -79,8 +90,7 @@ const ExpenseForm = () => {
       addExpense(expenses);
       setAlert({
         msg: 'Expense added successfully',
-        type: 'success',
-        color: 'success'
+        type: 'success'
       });
       setExpenses({
         name: '',
