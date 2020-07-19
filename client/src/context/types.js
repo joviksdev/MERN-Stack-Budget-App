@@ -3,13 +3,22 @@ export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const DISPLAY_BUDGET_FORM = 'DISPLAY_BUDGET_FORM';
 export const DISPLAY_EXPENSE_FORM = 'DISPLAY_EXPENSE_FORM';
 export const HIDE_FORM = 'HIDE_FORM';
+export const SHOW_AUTH_LIST = 'SHOW_AUTH_LIST';
+// Budget and Expenes type
+
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
-export const SET_EDIT = 'SET_EDIT';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const UPDATE_EXPENSE = 'UPDATE_EXPENSE';
 export const ADD_BUDGET = 'ADD_BUDGET';
 export const DELETE_BUDGET = 'DELETE_BUDGET';
 export const UPDATE_BUDGET = 'UPDATE_BUDGET';
+export const GET_BUDGET = 'GET_BUDGET';
+export const GET_EXPENSE = 'GET_EXPENSE';
+export const SET_ERROR = 'SET_ERROR';
+
+// App Type
+
+export const SET_EDIT = 'SET_EDIT';
 export const CLEAR_ALL = 'CLEAR_ALL';
 export const HIDE_AUTH_LIST = 'HIDE_AUTH_LIST';
 export const SET_ALERT = 'SET_ALERT';
@@ -19,7 +28,7 @@ export const REMOVE_ALERT = 'REMOVE_ALERT';
 
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
-export const REMOVE_MSG = 'REMOVE_MSG';
+export const REMOVE_ERROR = 'REMOVE_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const GET_USER = 'GET_USER';

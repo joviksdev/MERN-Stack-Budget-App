@@ -1,13 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../../context/app/appContext';
 import AlertContext from '../../context/alert/alertContext';
-import Alert from './Alert';
 
 const BudgetForm = () => {
   const appContext = useContext(AppContext);
   const alertContext = useContext(AlertContext);
 
-  const { isBudgetFormDisplay, budgetValue, addBudget } = appContext;
+  const {
+    isBudgetFormDisplay,
+    budgetValue,
+    addBudget,
+    errors,
+    updateBudget
+  } = appContext;
   const { setAlert } = alertContext;
 
   const [budget, setBudget] = useState({
@@ -17,12 +22,29 @@ const BudgetForm = () => {
 
   useEffect(
     () => {
-      if (budgetValue !== null) {
-        setBudget({ ...budget, ...budgetValue });
+      if (budgetValue !== undefined) {
+        setBudget({
+          ...budget,
+          amount: budgetValue !== null ? budgetValue.amount : '',
+          currency: budgetValue !== null ? budgetValue.currency : ''
+        });
+      }
+
+      if (errors !== null && errors !== 'Server Error') {
+        setAlert(errors.map(err => ({ ...err, type: 'warning' })));
+      }
+
+      if (errors === 'Server Error') {
+        setAlert([
+          {
+            msg: errors,
+            type: 'warning'
+          }
+        ]);
       }
     },
     // eslint-disable-next-line
-    [budgetValue]
+    [budgetValue, errors]
   );
 
   const setChange = e => {
@@ -31,7 +53,6 @@ const BudgetForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log('click');
 
     const { amount, currency } = budget;
 
@@ -56,11 +77,22 @@ const BudgetForm = () => {
       return;
     }
 
-    addBudget(budget);
-    setBudget({
-      amount: '',
-      currency: 'Select currency'
-    });
+    if (budgetValue === undefined || budgetValue === null) {
+      addBudget(budget);
+      setBudget({
+        amount: '',
+        currency: 'Select currency'
+      });
+    } else {
+      updateBudget({
+        ...budget,
+        id: budgetValue !== undefined && budgetValue._id
+      });
+      setBudget({
+        amount: '',
+        currency: 'Select currency'
+      });
+    }
   };
 
   return (
@@ -70,10 +102,10 @@ const BudgetForm = () => {
       onSubmit={onSubmit}
     >
       <h3 className='form-header'>Budget</h3>
-      <Alert />
       {budgetValue ? (
         <p>
-          Previous Budget: <span>&#8358;</span> {budgetValue.amount}
+          Previous Budget: <span>&#8358;</span>{' '}
+          {budgetValue ? budgetValue.amount : ''}
         </p>
       ) : (
         ''

@@ -4,17 +4,17 @@ import AlertContext from './alertContext';
 import { SET_ALERT, REMOVE_ALERT } from '../types';
 
 const AlartState = props => {
-  const initialState = [];
+  const initialState = null;
 
   const [state, dispatch] = useReducer(alertReducer, initialState);
   // Set Alert
 
   const setAlert = alerts => {
-    const alertArray = alerts.map(alert => ({ ...alert }));
+    //const alertArray = alerts.map(alert => ({ ...alert }));
 
     dispatch({
       type: SET_ALERT,
-      payload: alertArray
+      payload: alerts
     });
 
     setTimeout(() => {

@@ -1,13 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AppContext from '../../context/app/appContext';
 import ExpenseItem from './ExpenseItem';
 
 const Expense = () => {
   const appContext = useContext(AppContext);
-  const { expenses, clearAll } = appContext;
+  const { expenses, clearAll, getExpense } = appContext;
+
+  useEffect(() => {
+    getExpense();
+
+    // eslint-disable-next-line
+  }, []);
 
   const lists = expenses.map(expense => (
-    <div key={expense.id}>
+    <div key={expense._id}>
       <ExpenseItem {...expense} />
     </div>
   ));

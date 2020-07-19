@@ -7,7 +7,7 @@ const Alert = () => {
   const { alerts } = alertContext;
 
   return (
-    alerts.length !== 0 && (
+    alerts !== null && (
       <Fragment>
         {alerts.map((alert, i) => (
           <div key={i} className={`alert-container alert-${alert.type}`}>

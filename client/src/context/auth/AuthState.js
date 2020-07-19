@@ -6,7 +6,7 @@ import setTokenInHeader from '../../utils/setTokenInHeader';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  REMOVE_MSG,
+  REMOVE_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   GET_USER,
@@ -17,10 +17,10 @@ import Axios from 'axios';
 
 const AuthState = props => {
   const initialState = {
-    user: null,
-    isAuthenticated: false,
     token: null,
-    msg: []
+    user: null,
+    isAuthenticated: null,
+    error: null
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -36,10 +36,10 @@ const AuthState = props => {
 
     try {
       const res = await axios.post('/api/register', value, config);
-      const token = await res.data;
+
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: token
+        payload: res.data
       });
 
       getUser();
@@ -49,13 +49,9 @@ const AuthState = props => {
         payload: err.response.data.msg
       });
 
-      //Remove msg
+      // Remove Error
 
-      setTimeout(() => {
-        dispatch({
-          type: REMOVE_MSG
-        });
-      }, 5000);
+      clearError();
     }
   };
 
@@ -70,10 +66,10 @@ const AuthState = props => {
 
     try {
       const res = await axios.post('/api/auth', value, config);
-      const token = await res.data;
+
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: token
+        payload: res.data
       });
 
       getUser();
@@ -83,13 +79,9 @@ const AuthState = props => {
         payload: err.response.data.msg
       });
 
-      //Remove msg
+      // Remove Error
 
-      setTimeout(() => {
-        dispatch({
-          type: REMOVE_MSG
-        });
-      }, 5000);
+      clearError();
     }
   };
 
@@ -102,16 +94,20 @@ const AuthState = props => {
 
     try {
       const res = await Axios.get('/api/auth');
-      const user = await res.data;
+
       dispatch({
         type: GET_USER,
-        payload: user
+        payload: res.data
       });
     } catch (err) {
       dispatch({
         type: GET_USER_FAIL,
-        payload: err.response.data
+        payload: err.response.data.msg
       });
+
+      // Remove Error
+
+      clearError();
     }
   };
 
@@ -123,12 +119,22 @@ const AuthState = props => {
     });
   };
 
+  // Clear Error
+
+  const clearError = () => {
+    setTimeout(() => {
+      dispatch({
+        type: REMOVE_ERROR
+      });
+    }, 5000);
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user: state.user,
         isAuthenticated: state.isAuthenticated,
-        msg: state.msg,
+        error: state.error,
         registerUser,
         loginUser,
         getUser,

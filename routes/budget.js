@@ -28,12 +28,13 @@ router.post(
   [
     auth,
     [
-      check('budget')
+      check('amount')
         .not()
         .isEmpty()
         .withMessage('Enter your budget')
         .isNumeric()
-        .withMessage('Invalid budget, budget must be a number')
+        .withMessage('Invalid budget, budget must be a number'),
+      check('currency', 'Please a Currency')
     ]
   ],
   async (req, res) => {
@@ -43,16 +44,17 @@ router.post(
       return res.status(400).json({ msg: error.array() });
     }
 
-    const { budget } = req.body;
+    const { amount, currency } = req.body;
 
     try {
       const newBudget = new Budget({
         user: req.id,
-        budget
+        amount,
+        currency
       });
 
       await newBudget.save();
-      res.json({ msg: `Budget of ${budget} added successfully` });
+      res.json({ newBudget });
     } catch (err) {
       console.log(err.message);
       res.status(500).json({ msg: 'Server Error' });
@@ -69,20 +71,33 @@ router.put(
   [
     auth,
     [
-      check('budget')
+      check('amount')
         .not()
         .isEmpty()
         .withMessage('Enter your budget')
         .isNumeric()
-        .withMessage('Invalid budget, budget must be a number')
+        .withMessage('Invalid budget, budget must be a number'),
+      check('currency', 'Please a Currency')
     ]
   ],
   async (req, res) => {
-    const { budget } = req.body;
+    const { amount, currency, id } = req.body;
+
+    if (req.id !== req.params.id) {
+      return res.status(403).json({ msg: 'Failed request, try again' });
+    }
 
     try {
-      await Budget.findOneAndUpdate({ user: req.id }, { $set: { budget } });
-      res.json({ msg: 'Budget updated successfully' });
+      const update = await Budget.findOneAndUpdate(
+        id,
+        {
+          amount,
+          currency
+        },
+        { new: true }
+      );
+
+      res.json({ update });
     } catch (err) {
       console.log(err.message);
       res.status(500).json({ msg: 'Server Error' });

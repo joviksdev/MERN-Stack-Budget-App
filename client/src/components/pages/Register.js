@@ -20,10 +20,10 @@ const Register = props => {
 
   useEffect(
     () => {
-      if (msg !== null) {
+      /*       if (msg !== null) {
         const alerts = msg.map(alert => ({ ...alert, type: 'warning' }));
         setAlert(alerts);
-      }
+      } */
 
       if (isAuthenticated) {
         props.history.push('/');
@@ -110,56 +110,58 @@ const Register = props => {
   };
 
   return (
-    <div className='form-wrapper'>
-      <form className='register-form container' onSubmit={handleSubmit}>
-        <Alert />
-        <h3>Register</h3>
-        <div className='form-group'>
-          <label htmlFor='name'>Name</label>
-          <input
-            type='text'
-            name='name'
-            placeholder='Enter your name'
-            onChange={setChange}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            name='email'
-            placeholder='Enter your email'
-            onChange={setChange}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            name='password'
-            placeholder='Enter you password'
-            onChange={setChange}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password2'>Comfirm Password</label>
-          <input
-            type='password'
-            name='password2'
-            placeholder='Comfirm password'
-            onChange={setChange}
-          />
-        </div>
-        <input type='submit' value='Register' />
-        <p>
-          Already register?{' '}
-          <span>
-            <Link className='link' to='login'>
-              Login now.
-            </Link>
-          </span>
-        </p>
-      </form>
+    <div>
+      <Alert />
+      <div className='form-wrapper'>
+        <form className='register-form ' onSubmit={handleSubmit}>
+          <h3>Register</h3>
+          <div className='form-group'>
+            <label htmlFor='name'>Name</label>
+            <input
+              type='text'
+              name='name'
+              placeholder='Enter your name'
+              onChange={setChange}
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='email'>Email</label>
+            <input
+              type='email'
+              name='email'
+              placeholder='Enter your email'
+              onChange={setChange}
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='password'>Password</label>
+            <input
+              type='password'
+              name='password'
+              placeholder='Enter you password'
+              onChange={setChange}
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='password2'>Comfirm Password</label>
+            <input
+              type='password'
+              name='password2'
+              placeholder='Comfirm password'
+              onChange={setChange}
+            />
+          </div>
+          <input type='submit' value='Register' />
+          <p>
+            Already register?{' '}
+            <span>
+              <Link className='link' to='login'>
+                Login now.
+              </Link>
+            </span>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,45 +1,53 @@
-import React, { useContext, Fragment, useEffect } from 'react';
-import BudgetForm from '../layout/BudgetForm';
-import ExpenseForm from '../layout/ExpenseForm';
-import MenuList from '../layout/MenuList';
-import AppContext from '../../context/app/appContext';
-import CloseBtn from '../layout/CloseBtn';
-import Budget from '../contents/Budget';
-import Expense from '../contents/Expense';
-import NoContent from '../layout/NoContent';
-import Total from '../contents/Total';
-import ToggleBtnMenu from '../layout/ToggleBtnMenu';
-import AuthContext from '../../context/auth/authContext';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import bgLogo from '../../images/Budget-logo.png';
+import preview from '../../images/preview.JPG';
+import Image from '../layout/Image';
 
 const Index = () => {
-  const appContext = useContext(AppContext);
-  const authContext = useContext(AuthContext);
-
-  const { budgetValue, expenses } = appContext;
-
-  useEffect(() => {
-    authContext.getUser();
-    // eslint-disable-next-line
-  }, []);
-
   return (
-    <section>
-      {budgetValue === null && expenses.length === 0 && (
-        <Fragment>
-          <NoContent />
-        </Fragment>
-      )}
-
-      <ToggleBtnMenu />
-      <Budget />
-      <Expense />
-      <CloseBtn />
-      <MenuList />
-      <BudgetForm />
-      <ExpenseForm />
-      <Total />
-    </section>
+    <Fragment>
+      <section className='showcase'>
+        <div className='showcase-header'>
+          <div className='container'>
+            <div className='showcase-content'>
+              <h1>Gain control of</h1>
+              <h3>your money</h3>
+            </div>
+            <div style={logo}>
+              <Image src={bgLogo} alt='budget-icon' />
+            </div>
+          </div>
+        </div>
+        <div className='showcase-preview  my-2'>
+          <div style={previewStyle} className='preview container'>
+            <Image src={preview} alt='preview' />
+          </div>
+          <div className='preview-description'>
+            <div className='container'>
+              <p>
+                Keep record of how much money you spend on each stuff you need
+              </p>
+              <h3 className='mt-1'>
+                <Link className='btn btn-get-started link' to='/register'>
+                  get started now
+                </Link>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </Fragment>
   );
+};
+
+const logo = {
+  width: '250px',
+  height: '250px'
+};
+
+const previewStyle = {
+  maxWidth: '300px'
 };
 
 export default Index;

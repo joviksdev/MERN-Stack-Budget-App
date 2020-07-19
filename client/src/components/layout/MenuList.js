@@ -19,7 +19,7 @@ const MenuList = () => {
           transitionDelay: '0.2s'
         }}
       >
-        <button className='btn' onClick={displayBudgetForm}>
+        <button className='btn btn-block' onClick={displayBudgetForm}>
           {budgetValue ? 'Update Budget' : 'Add Budget'}
         </button>
       </li>

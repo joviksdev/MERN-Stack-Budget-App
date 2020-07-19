@@ -5,13 +5,18 @@ import {
   DISPLAY_EXPENSE_FORM,
   HIDE_FORM,
   DELETE_EXPENSE,
+  GET_EXPENSE,
   DELETE_BUDGET,
   ADD_BUDGET,
+  GET_BUDGET,
   ADD_EXPENSE,
   SET_EDIT,
+  UPDATE_BUDGET,
   UPDATE_EXPENSE,
   CLEAR_ALL,
-  HIDE_AUTH_LIST
+  HIDE_AUTH_LIST,
+  SHOW_AUTH_LIST,
+  SET_ERROR
 } from '../types';
 
 export default (state, action) => {
@@ -26,6 +31,12 @@ export default (state, action) => {
       return {
         ...state,
         isDisplayAuthList: (state.isDisplayAuthList = false)
+      };
+
+    case SHOW_AUTH_LIST:
+      return {
+        ...state,
+        isDisplayAuthList: (state.isDisplayAuthList = true)
       };
 
     case TOGGLE_MENU:
@@ -69,14 +80,34 @@ export default (state, action) => {
       return {
         ...state,
         expenses: state.expenses.filter(
-          expense => expense.id !== action.payload
+          expense => expense._id !== action.payload
         )
       };
 
     case ADD_BUDGET:
       return {
         ...state,
+        isBudgetFormDisplay: (state.isBudgetFormDisplay = false)
+      };
+
+    case UPDATE_BUDGET:
+      return {
+        ...state,
         budgetValue: action.payload,
+        isBudgetFormDisplay: (state.isBudgetFormDisplay = false)
+      };
+
+    case GET_BUDGET:
+      return {
+        ...state,
+        budgetValue: action.payload[0]
+      };
+
+    case GET_EXPENSE:
+      return {
+        ...state,
+        expenses: action.payload,
+        isExpenseFormDisplay: (state.isExpenseFormDisplay = false),
         isBudgetFormDisplay: (state.isBudgetFormDisplay = false)
       };
 
@@ -101,7 +132,7 @@ export default (state, action) => {
         isSetEdit: false,
         expenses: [
           ...state.expenses.map(expense =>
-            expense.id === action.payload.id ? action.payload : expense
+            expense._id === action.payload._id ? action.payload : expense
           )
         ],
         currentEdit: null,
@@ -114,6 +145,12 @@ export default (state, action) => {
       return {
         ...state,
         expenses: (state.expenses = [])
+      };
+
+    case SET_ERROR:
+      return {
+        ...state,
+        errors: action.payload
       };
 
     default:

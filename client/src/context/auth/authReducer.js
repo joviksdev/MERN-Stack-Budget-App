@@ -1,7 +1,7 @@
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  REMOVE_MSG,
+  REMOVE_ERROR,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   GET_USER,
@@ -24,8 +24,8 @@ export default (state, action) => {
       localStorage.setItem('token', action.payload.token);
       return {
         ...state,
-        token: action.payload,
-        isAuthenticated: true
+        isAuthenticated: true,
+        token: localStorage.getItem('token')
       };
 
     case REGISTER_FAIL:
@@ -34,9 +34,9 @@ export default (state, action) => {
       localStorage.removeItem('token');
       return {
         ...state,
-        token: null,
         isAuthenticated: false,
-        msg: [...state.msg, action.payload]
+        error: [action.payload],
+        token: null
       };
 
     case LOGOUT_USER:
@@ -44,14 +44,14 @@ export default (state, action) => {
       return {
         ...state,
         user: null,
-        token: null,
-        isAuthenticated: false
+        isAuthenticated: false,
+        token: null
       };
 
-    case REMOVE_MSG:
+    case REMOVE_ERROR:
       return {
         ...state,
-        msg: []
+        error: null
       };
 
     default:

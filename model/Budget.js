@@ -5,8 +5,12 @@ const BudgetSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
-  budget: {
+  amount: {
     type: Number,
+    required: true
+  },
+  currency: {
+    type: String,
     required: true
   },
   date: {

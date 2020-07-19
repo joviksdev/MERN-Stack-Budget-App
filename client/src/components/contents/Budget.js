@@ -7,17 +7,20 @@ const Budget = () => {
   const appContext = useContext(AppContext);
   const { budgetValue, deleteBudget } = appContext;
 
+  const setDelete = () => {
+    deleteBudget();
+  };
+
   return (
-    budgetValue !== null && (
-      <div className=' container budget mt-1'>
-        <p>
-          Budget: <span className='amount'>{budgetValue.amount}</span>
-        </p>
-        <span style={iconStyle} onClick={deleteBudget}>
-          <Image src={del} alt='delete' />
-        </span>
-      </div>
-    )
+    <div className=' container budget mt-1'>
+      <p>
+        Budget:{' '}
+        <span className='amount'>{budgetValue ? budgetValue.amount : ''}</span>
+      </p>
+      <span style={iconStyle} onClick={setDelete}>
+        <Image src={del} alt='delete' />
+      </span>
+    </div>
   );
 };
 

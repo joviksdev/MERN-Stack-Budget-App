@@ -14,20 +14,21 @@ const Login = props => {
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
-  const { loginUser, msg, isAuthenticated } = authContext;
+  const { loginUser, error, isAuthenticated } = authContext;
 
   useEffect(
     () => {
       if (isAuthenticated) {
-        props.history.push('/');
+        props.history.push('/budget&expenses');
       }
-      if (msg !== null) {
-        const alerts = msg.map(alert => ({ ...alert, type: 'warning' }));
-        setAlert(alerts);
+
+      if (error !== null) {
+        const alert = error.map(alert => ({ msg: alert, type: 'warning' }));
+        setAlert(alert);
       }
     },
     // eslint-disable-next-line
-    [msg, isAuthenticated]
+    [error, isAuthenticated]
   );
 
   const setChange = e => {
@@ -84,40 +85,42 @@ const Login = props => {
   };
 
   return (
-    <div className='form-wrapper'>
-      <form className='login-form container' onSubmit={handleSubmit}>
-        <h3>Log in</h3>
-        <Alert />
-        <div className='form-group'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            name='email'
-            placeholder='Enter your email'
-            value={details.name}
-            onChange={setChange}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            name='password'
-            placeholder='Enter you password'
-            value={details.password}
-            onChange={setChange}
-          />
-        </div>
-        <input type='submit' value='Log in' />
-        <p>
-          Not register?{' '}
-          <span>
-            <Link className='link' to='/register'>
-              Register now.
-            </Link>
-          </span>
-        </p>
-      </form>
+    <div>
+      <Alert />
+      <div className='form-wrapper'>
+        <form className='login-form' onSubmit={handleSubmit}>
+          <h3>Log in</h3>
+          <div className='form-group'>
+            <label htmlFor='email'>Email</label>
+            <input
+              type='email'
+              name='email'
+              placeholder='Enter your email'
+              value={details.name}
+              onChange={setChange}
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='password'>Password</label>
+            <input
+              type='password'
+              name='password'
+              placeholder='Enter you password'
+              value={details.password}
+              onChange={setChange}
+            />
+          </div>
+          <input type='submit' value='Log in' />
+          <p>
+            Not register?{' '}
+            <span>
+              <Link className='link' to='/register'>
+                Register now.
+              </Link>
+            </span>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

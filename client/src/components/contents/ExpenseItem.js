@@ -4,17 +4,17 @@ import del from '../../images/delete.png';
 import edit from '../../images/edit.png';
 import AppContext from '../../context/app/appContext';
 
-const ExpenseItem = ({ id, name, amount }) => {
+const ExpenseItem = ({ _id, name, amount }) => {
   const appContext = useContext(AppContext);
   const { deleteExpense, displayExpenseForm, setEdit } = appContext;
 
   const delExpense = () => {
-    deleteExpense(id);
+    deleteExpense(_id);
   };
 
   const setExpense = () => {
     const expense = {
-      id,
+      _id,
       name,
       amount
     };

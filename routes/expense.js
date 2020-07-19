@@ -34,10 +34,10 @@ router.post(
         .withMessage('Enter Expense')
         .isString()
         .withMessage('Invalid expense, expense must be word characters'),
-      check('price')
+      check('amount')
         .not()
         .isEmpty()
-        .withMessage('Enter price')
+        .withMessage('Enter amount')
         .isNumeric()
         .withMessage('Invalid price, price must be a number')
     ]
@@ -49,17 +49,17 @@ router.post(
       return res.status(400).json({ msg: error.array() });
     }
 
-    const { name, price } = req.body;
+    const { name, amount } = req.body;
 
     try {
-      const newExpense = new Expense({
+      let newExpense = new Expense({
         user: req.id,
         name,
-        price
+        amount
       });
 
-      await newExpense.save();
-      res.json({ msg: `Expense added successfully` });
+      newExpense = await newExpense.save();
+      res.json({ msg: 'Expense added successfully', newExpense });
     } catch (err) {
       console.log(err.message);
       res.status(500).json({ msg: 'Server Error' });
@@ -82,7 +82,7 @@ router.put(
         .withMessage('Enter Expense')
         .isString()
         .withMessage('Invalid expense, expense must be word characters'),
-      check('price')
+      check('amount')
         .not()
         .isEmpty()
         .withMessage('Enter price')
@@ -91,13 +91,19 @@ router.put(
     ]
   ],
   async (req, res) => {
-    const { name, price } = req.body;
+    const { name, amount } = req.body;
 
     try {
       const id = req.params.id;
 
-      await Expense.findByIdAndUpdate(id, { $set: { name, price } });
-      res.json({ msg: 'Expense updated successfully' });
+      console.log(id);
+
+      const updatedExpense = await Expense.findByIdAndUpdate(
+        id,
+        { $set: { name, amount } },
+        { new: true }
+      );
+      res.json({ msg: 'Expense updated successfully', updatedExpense });
     } catch (err) {
       console.log(err.message);
       res.status(500).json({ msg: 'Unable to update, try again' });
