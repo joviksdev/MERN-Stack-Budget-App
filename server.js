@@ -11,8 +11,6 @@ connectDb();
 
 app.use(express.json());
 
-app.get('/', (req, res) => res.json({ msg: 'Budget Application API' }));
-
 // Routes
 
 app.use('/api/register', require('./routes/register'));
