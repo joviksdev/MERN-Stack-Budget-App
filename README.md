@@ -2,7 +2,7 @@
 
 ## Live Preview
 
-[http://localhost:5000](Live preview) hosted on heroku.
+[Live preview](http://localhost:5000) hosted on heroku.
 
 ## Available Scripts
 
