@@ -1,4 +1,4 @@
 {
-    "mongoUrl": "mongodb+srv://joviks:joviks@budget.jhn2g.mongodb.net/budget?retryWrites=true&w=majority",
+    "mongoUrl": "mongodb+srv://joviks:joviks93@budget.jhn2g.mongodb.net/budget?retryWrites=true&w=majority",
     "secret": "jwtsecret"
 }
