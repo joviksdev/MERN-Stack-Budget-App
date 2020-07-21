@@ -1,9 +1,5 @@
 # MERN Stack Budget Application.
 
-## Live Preview
-
-[Live preview](http://localhost:5000) hosted on heroku.
-
 ## Available Scripts
 
 In the root directory of the project, you can run:
